@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=UBMP410-Intro-1-Input-Output.X
+PROJECTNAME=UBMP410-Intro-1-Input-Output
 
 # Active Configuration
 DEFAULTCONF=default
