@@ -148,4 +148,3 @@ unsigned char ADC_read(void);
 unsigned char ADC_read_channel(unsigned char);
 
 // TODO - Add additional function prototypes for new functions in UBMP410.c here
-
