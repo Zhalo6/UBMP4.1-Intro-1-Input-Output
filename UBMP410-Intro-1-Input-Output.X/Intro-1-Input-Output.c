@@ -31,17 +31,17 @@ int main(void)
     // Code in this while loop runs repeatedly.
     while(1)
 	{
-        // If SW2 is pressed, make a flashy light pattern
+       /* // If SW2 is pressed, make a flashy light pattern
         if(SW2 == 0)
         {
             LED3 = 1;
-            __delay_ms(100);
+            __delay_ms(4205);
             LED4 = 1;
             __delay_ms(100);
             LED5 = 1;
             __delay_ms(100);
             LED6 = 1;
-            __delay_ms(100);
+            __delay_ms(500);
             LED3 = 0;
             __delay_ms(100);
             LED4 = 0;
@@ -49,10 +49,18 @@ int main(void)
             LED5 = 0;
             __delay_ms(100);
             LED6 = 0;
-            __delay_ms(100);
+            __delay_ms(500);
         }
-        
+       */ 
         // Add code for your Program Analysis and Programming Activities here:
+if(SW2 == 0)
+{
+    LED1 = 1;
+    __delay_ms(100);
+     LED1 = 0;
+     __delay_ms(100);
+}
+
 
         // Activate bootloader if SW1 is pressed.
         if(SW1 == 0)
@@ -67,20 +75,22 @@ int main(void)
  * 1. How many times do the LEDs flash if SW2 is quickly pressed and released?
  *    Do the LEDs keep flashing when SW2 is held? Look at the program and
  *    explain why this happens when SW2 is held.
- * 
+ * The LEDs each flash twice when pressed.
+ The LEDs will continue to flash if held as the program checks for the button to == 0 which is the pressed state and holding it would keep it pressed allowing the buttons to flash.
  * 2. Explain the difference between the statements: LED3 = 0; and LED3 = 1;
- * 
+ * LED3 = 0; means it is off and LED3 = 1; means it is on.
  * 3. What voltage do you expect the microcontroller to output to LED D3 when
  *    the statement LED3 = 0; runs? What voltage do you expect the output to be
  *    when the statement LED3 = 1; runs?
- * 
+ * When LED3 = 0 there will be no voltage as it is off.
+ When LED3= 1 there will be 5V or less as the power source for the board is an USB which averages 5V off output power.
  *    You can confirm the output voltage with a voltmeter if you have access
  *    to one. If you tried that, did the voltage match your prediction?
- * 
+ * N/A
  * 4. The statement 'if(SW2 == 0)' uses two equal signs, while the statement
  *    'LED3 = 1;' uses a single equal sign. What operation is performed by one
  *    equal sign? What operation is performed by two equal signs?
- * 
+ * One equal sign sets the value of the variable while two equal signs check for equivalency.
  * 5. The following program code includes instructions that write to the PORTC
  *    output latches directly. Try it by copying and pasting this code below
  *    the existing SW2 'if' structure, at the location shown by the comment.
@@ -96,7 +106,7 @@ int main(void)
  *    What happens when pushbutton SW3 is pressed? Identify at least one
  *    advantage and one disadvantage of controlling the LEDs using 'LATC' writes
  *    rather than through individual 'LEDn = x;' statements.
- * 
+ * When SW3 is pressed all the light illuminate. One advatage is the quick contorl of all of the LED's to do the same command the down side as all the LED's have to do the same thing but individualy defining the LED's allows for more specific contorl.
  * 6. Next, compare the operation of 'if' and 'while' structures to simulate
  *    momentary buttons. Replace the code you added in 5, above, with this code:
 
@@ -118,14 +128,14 @@ int main(void)
         LED5 = 0;
 
  *    First, try pressing and releasing SW3 and SW4 one at a time.
- * 
+ * They light up one at a time while the buttn is held.
  *    Next, press and hold SW3 while pressing and releasing SW4. Does it work
  *    as expected?
- * 
+ * No SW3 does not light up its LED while SW4 is held.
  *    Next, try press and holding SW4 while pressing and releasing SW3. Does it
  *    work as expected? Explain the difference in operation between the 'if' and
  *    'while' structures making up the momentary button code.
- * 
+ * If you hold SW4 while press holding SW3 SW3 can not turn off. The 'if' structureis not a loop so it can constantly check for the status of the button and other code but the 'while' is a loop so when it is running no other code can run which stops the "turning off" part of the other code form running which keeps the SW3 illuminated.
  * 7. Let's explore logical conditions using 'if' statements. Replace the code
  *    added in 6, above, with this nested if code to make a logical AND
  *    condition that will light LED D4 only if both SW3 and SW4 are pressed:
@@ -149,7 +159,7 @@ int main(void)
 
  *    Test the code to ensure it works as expected. Does the order of the if
  *    conditions matter? (eg. swap the conditional checks for SW3 and SW4)
- * 
+ * It does work as expected no matter which order the conditions are in.
  * 8. Next, replace the code from 7 with the following code which implements a
  *    logical AND conditional operator composed of two ampersands '&&':
  
@@ -166,7 +176,7 @@ int main(void)
  *    Does '&&' work the same way as the nested if structures? Can you think of
  *    at least one advantage of using a logical conditional operator instead of
  *    nested if structures?
- * 
+ * '&&' does work the same way as the nested if structure. One advantage to using the logical condition operators as it checks both at the same time which might mean the code would be more consistent if other code is mixed in.
  * 9. Replace the double ampersand '&&' with double vertical bars '||)' to make
  *    a logical OR conditional operator. Your code should look like this:
   
@@ -181,17 +191,17 @@ int main(void)
         }
 
  *    Describe the conditions under which LED4 turns on.
- * 
+ * Either SW3 or SW4 is pressed or both at the same time.
  * 
  * Programming Activities
  * 
  * 1. The statement '__delay_ms(100);' creates a 100ms delay. Try changing one
  *    or more of the delay values in the program to 500ms and see what happens.
- * 
+ * If you change the delay value the time the light stays illuminated before the next one illuminates and it deluminates increase.
  *    Can the delay be made even longer? Try 1000 ms. How big can the delay be
  *    before MPLAB-X produces an error message? (Hint: can you think of a fast
  *    and efficient way of guessing an unknown number?)
- * 
+ * 1000ms does work and the highest number is 4205. You can check this quickly by looking at the error messages.
  * 2. The '__delay_ms();' function only accepts integers as delay values. To
  *    make delays shorter than 1ms, specify a delay in microseconds using the
  *    '__delay_us();' function. You won't be able to see such short LED flashes
@@ -210,7 +220,7 @@ int main(void)
  *    Try changing the delay values in both of the __delay_us(); functions.
  *    Does the pitch of the tone increase or decrease if the delay value is
  *    made smaller?
- * 
+ * The smaller the value the higher the pitch.
  * 3. This code demonstrates a more compact way of toggling the beeper output
  *    using a logical NOT operator '!'. Replace the code above, with this code:
  
@@ -226,41 +236,66 @@ int main(void)
  *    be in after this code runs? While one advantage of this method is smaller
  *    code, can you think of one or more disadvantages based on its output when
  *    the button is released?
- * 
+ * The disadvantage here is that you can't have a different value for when the beeper starts vs stops making its noise as it uses the same number.
  * 4. Using modified versions of the original SW2 'if' structure, create a
  *    program that makes a unique LED flashing pattern for each pushbutton.
  * 
  *    Test each of your flashing patterns. Describe what happens when more than
  *    one button is held. Do all of the patterns try to flash the LEDs at the
  *    same time, or sequentially? Explain why this is.
- * 
+ * When multiple buttons are pressed at the same time they run based on what order the buttons were pressed in as that is where the code starts getting read from.
  * 5. Create a program that makes a different tone for each pushbutton.
  * 
  *    Test each tone by pressing each button individually. Next, press two or
  *    more buttons at the same time. Describe what the tone waveform would look
  *    like when more than one button is held.
- * 
+ * When multiple buttons corresponding to different tones are pressed the tones are merged as the beeper can do multiple tones at once. For example a high tone and a low tone together would merge to make a medium pitch tone.
  * 6. Use individual 'if' structures to simulate 'Start' and 'Stop' buttons for
  *    an industrial machine. LED D4 should turn on when SW3 is pressed, stay on
  *    even after SW3 is released, and turn off when SW4 is pressed. Test your
  *    program to make sure it works.
- * 
+ *  if(SW2 == 0)
+  { 
+      LED5 = 1;
+  }
+  if(SW3 == 0)
+  {
+      LED5 = 0;
+  }
  * 7. Running your program from 6, above, describe what happens when both SW3
  *    and SW4 are pressed. Does LED D4 stay on? If so, how does the brightness
  *    of LED D4 compare between its normal on state following SW3 being pressed
  *    to this new state when both SW3 and SW4 are bing held? Can you explain
  *    why it changes?
- * 
+ * When both buttons are pressed the brightness of the LED decreses compared to its normal state. When both are pressed the LED is turning on and off quickly which gives it the dim appearence.
  * 8. As you can imagine, an industrial machine that is able to turn on even
  *    while its 'Stop' button is pressed represents a significant safety hazard.
  *    Using a logical conditional operator, modify the start-stop program from
  *    activity 5 to make it safer. SW3 should only turn on LED D4 if SW4 is
  *    released.
- * 
+ * if(SW2 && SW3 == 0)
+{
+    LED5 = 0;
+}
+  if(SW2 == 0 && SW3 == 1)
+  { 
+      LED5 = 1;
+  }
+  if(SW3 == 0 && SW2 == 1)
+  {
+      LED5 = 0;
+  }
  * 9. LED D1 is normally used to indicate that a program is running, but it can
  *    be controlled by your program as well. If you take a look at the UBMP4
  *    schematic, you will see that LED D1's cathode (or negative) pin is
  *    connected to the microcontroller instead of the anode (positive) pin as
  *    with the other LEDs. This means that you need to make D1's output a zero
  *    to turn D1 on. Try it! Make a program that controls or flashes LED D1.
+ if(SW2 == 0)
+{
+    LED1 = 1;
+    __delay_ms(100);
+     LED1 = 0;
+     __delay_ms(100);
+}
  */
